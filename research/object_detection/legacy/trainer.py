@@ -220,7 +220,10 @@ def train(create_tensor_dict_fn,
           worker_job_name,
           is_chief,
           train_dir,
-          graph_hook_fn=None):
+          graph_hook_fn=None,
+          llow_memory_growth=False,
+          max_ckpt_to_keep=1
+          ):
   """Training function for detection models.
 
   Args:
@@ -241,6 +244,8 @@ def train(create_tensor_dict_fn,
       built (before optimization). This is helpful to perform additional changes
       to the training graph such as adding FakeQuant ops. The function should
       modify the default graph.
+    max_ckpt_to_keep: number of latest checkpoints to keep.
+
 
   Raises:
     ValueError: If both num_clones > 1 and train_config.sync_replicas is true.
@@ -370,10 +375,11 @@ def train(create_tensor_dict_fn,
     # Soft placement allows placing on CPU ops without GPU implementation.
     session_config = tf.ConfigProto(allow_soft_placement=True,
                                     log_device_placement=False)
+    session_config.gpu_options.allow_growth = allow_memory_growth
 
     # Save checkpoints regularly.
     keep_checkpoint_every_n_hours = train_config.keep_checkpoint_every_n_hours
-    saver = tf.train.Saver(
+    saver = tf.train.Saver(max_to_keep=max_ckpt_to_keep,
         keep_checkpoint_every_n_hours=keep_checkpoint_every_n_hours)
 
     # Create ops required to initialize the model from a given checkpoint.

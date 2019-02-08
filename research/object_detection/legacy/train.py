@@ -58,6 +58,12 @@ flags = tf.app.flags
 flags.DEFINE_string('master', '', 'Name of the TensorFlow master to use.')
 flags.DEFINE_integer('task', 0, 'task id')
 flags.DEFINE_integer('num_clones', 1, 'Number of clones to deploy per worker.')
+
+flags.DEFINE_integer('n_steps', 0, 'no. of training steps (overrides the protobuf file)')
+flags.DEFINE_boolean('allow_memory_growth', True, 'allow_memory_growth')
+flags.DEFINE_integer('max_ckpt_to_keep', 1,
+                     'Number of checkpoints to keep.')
+
 flags.DEFINE_boolean('clone_on_cpu', False,
                      'Force clones to be deployed on CPU.  Note that even if '
                      'set to False (allowing ops to run on gpu), some ops may '
@@ -109,6 +115,11 @@ def main(_):
 
   model_config = configs['model']
   train_config = configs['train_config']
+
+  if FLAGS.n_steps > 0:
+      train_config.num_steps = FLAGS.n_steps
+      print('Training for {} steps'.format(FLAGS.n_steps))
+
   input_config = configs['train_input_config']
 
   model_fn = functools.partial(
@@ -177,7 +188,10 @@ def main(_):
       worker_job_name,
       is_chief,
       FLAGS.train_dir,
-      graph_hook_fn=graph_rewriter_fn)
+      graph_hook_fn=graph_rewriter_fn,
+      allow_memory_growth=FLAGS.allow_memory_growth,
+      ax_ckpt_to_keep=FLAGS.max_ckpt_to_keep
+  )
 
 
 if __name__ == '__main__':
