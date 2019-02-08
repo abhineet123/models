@@ -21,6 +21,7 @@ from __future__ import print_function
 from absl import flags
 
 import tensorflow as tf
+import tensorflow.contrib.estimator as tf_estimator
 
 from object_detection import model_hparams
 from object_detection import model_lib
@@ -53,6 +54,8 @@ flags.DEFINE_boolean(
     'run_once', False, 'If running in eval-only mode, whether to run just '
     'one round of eval vs running continuously (default).'
 )
+# flags.DEFINE_integer('n_steps', 0, 'no. of training steps (overrides the protobuf file)')
+
 FLAGS = flags.FLAGS
 
 
@@ -62,6 +65,7 @@ def main(unused_argv):
   config = tf.estimator.RunConfig(model_dir=FLAGS.model_dir)
 
   train_and_eval_dict = model_lib.create_estimator_and_inputs(
+      flags=FLAGS,
       run_config=config,
       hparams=model_hparams.create_hparams(FLAGS.hparams_overrides),
       pipeline_config_path=FLAGS.pipeline_config_path,
@@ -102,8 +106,8 @@ def main(unused_argv):
         eval_on_train_data=False)
 
     # Currently only a single Eval Spec is allowed.
-    tf.estimator.train_and_evaluate(estimator, train_spec, eval_specs[0])
 
+    tf_estimator.train_and_evaluate(estimator, train_spec, eval_specs[0])
 
 if __name__ == '__main__':
   tf.app.run()
