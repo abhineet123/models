@@ -221,7 +221,7 @@ def train(create_tensor_dict_fn,
           is_chief,
           train_dir,
           graph_hook_fn=None,
-          llow_memory_growth=False,
+          allow_memory_growth=False,
           max_ckpt_to_keep=1
           ):
   """Training function for detection models.
