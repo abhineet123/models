@@ -21,7 +21,7 @@ from __future__ import print_function
 from absl import flags
 
 import tensorflow as tf
-import tensorflow.contrib.estimator as tf_estimator
+# import tensorflow.contrib.estimator as tf_estimator
 
 from object_detection import model_hparams
 from object_detection import model_lib
@@ -107,7 +107,7 @@ def main(unused_argv):
 
     # Currently only a single Eval Spec is allowed.
 
-    tf_estimator.train_and_evaluate(estimator, train_spec, eval_specs[0])
+    tf.estimator.train_and_evaluate(estimator, train_spec, eval_specs[0])
 
 if __name__ == '__main__':
   tf.app.run()
