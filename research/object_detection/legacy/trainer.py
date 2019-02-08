@@ -244,6 +244,7 @@ def train(create_tensor_dict_fn,
       built (before optimization). This is helpful to perform additional changes
       to the training graph such as adding FakeQuant ops. The function should
       modify the default graph.
+    allow_memory_growth: allow_memory_growth.
     max_ckpt_to_keep: number of latest checkpoints to keep.
 
 
@@ -419,4 +420,5 @@ def train(create_tensor_dict_fn,
             train_config.num_steps if train_config.num_steps else None),
         save_summaries_secs=120,
         sync_optimizer=sync_optimizer,
-        saver=saver)
+        saver=saver,
+        ignore_live_threads=True)

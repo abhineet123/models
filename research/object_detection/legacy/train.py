@@ -175,24 +175,27 @@ def main(_):
     graph_rewriter_fn = graph_rewriter_builder.build(
         configs['graph_rewriter_config'], is_training=True)
 
-  trainer.train(
-      create_input_dict_fn,
-      model_fn,
-      train_config,
-      master,
-      task,
-      FLAGS.num_clones,
-      worker_replicas,
-      FLAGS.clone_on_cpu,
-      ps_tasks,
-      worker_job_name,
-      is_chief,
-      FLAGS.train_dir,
-      graph_hook_fn=graph_rewriter_fn,
-      allow_memory_growth=FLAGS.allow_memory_growth,
-      max_ckpt_to_keep=FLAGS.max_ckpt_to_keep
-  )
-
+  try:
+      trainer.train(
+          create_input_dict_fn,
+          model_fn,
+          train_config,
+          master,
+          task,
+          FLAGS.num_clones,
+          worker_replicas,
+          FLAGS.clone_on_cpu,
+          ps_tasks,
+          worker_job_name,
+          is_chief,
+          FLAGS.train_dir,
+          graph_hook_fn=graph_rewriter_fn,
+          allow_memory_growth=FLAGS.allow_memory_growth,
+          max_ckpt_to_keep=FLAGS.max_ckpt_to_keep
+      )
+  except RuntimeError as e:
+      print('UIgnoring annoying RuntimeError: {}'.format(e))
+      pass
 
 if __name__ == '__main__':
   tf.app.run()
