@@ -579,9 +579,9 @@ def create_estimator_and_inputs(
     model_config = configs['model']
     train_config = configs['train_config']
 
-    if flags.n_steps > 0:
-        train_config.num_steps = FLAGS.n_steps
-        print('Training for {} steps'.format(FLAGS.n_steps))
+    if  train_steps > 0:
+        # train_config.num_steps = FLAGS.n_steps
+        print('Training for {} steps'.format(train_steps))
 
     train_input_config = configs['train_input_config']
     eval_config = configs['eval_config']
