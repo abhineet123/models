@@ -190,7 +190,7 @@ def main(_):
       FLAGS.train_dir,
       graph_hook_fn=graph_rewriter_fn,
       allow_memory_growth=FLAGS.allow_memory_growth,
-      ax_ckpt_to_keep=FLAGS.max_ckpt_to_keep
+      max_ckpt_to_keep=FLAGS.max_ckpt_to_keep
   )
 
 
