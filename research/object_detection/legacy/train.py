@@ -199,3 +199,5 @@ def main(_):
 
 if __name__ == '__main__':
   tf.app.run()
+  os.kill(os.getpid(), 9)
+
