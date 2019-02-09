@@ -18,6 +18,7 @@
 import re
 import tensorflow as tf
 from tensorflow import logging as logging
+logging.propagate = False
 slim = tf.contrib.slim
 
 
