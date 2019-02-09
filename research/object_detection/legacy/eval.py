@@ -77,6 +77,8 @@ flags.DEFINE_boolean(
     'run_once', False, 'Option to only run a single pass of '
     'evaluation. Overrides the `max_evals` parameter in the '
     'provided config.')
+flags.DEFINE_integer('num_examples', 0,
+                     'Number of examples to override the config file (if >0).')
 FLAGS = flags.FLAGS
 
 
