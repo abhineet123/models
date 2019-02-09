@@ -125,6 +125,9 @@ def main(unused_argv):
   if FLAGS.run_once:
     eval_config.max_evals = 1
 
+  if FLAGS.num_examples > 0:
+    eval_config.num_examples = FLAGS.num_examples
+
   graph_rewriter_fn = None
   if 'graph_rewriter_config' in configs:
     graph_rewriter_fn = graph_rewriter_builder.build(
