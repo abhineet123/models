@@ -167,7 +167,8 @@ def multiclass_non_max_suppression(boxes,
             boxlist_and_class_scores.get_field(fields.BoxListFields.scores),
             max_selection_size,
             iou_threshold=iou_thresh,
-            score_threshold=score_thresh)
+            # score_threshold=score_thresh
+        )
         num_valid_nms_boxes = tf.shape(selected_indices)[0]
         selected_indices = tf.concat(
             [selected_indices,
