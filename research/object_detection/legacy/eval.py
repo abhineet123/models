@@ -107,6 +107,7 @@ def main(unused_argv):
   model_config = configs['model']
   eval_config = configs['eval_config']
   input_config = configs['eval_input_config']
+  input_config
   if FLAGS.eval_training_data:
     input_config = configs['train_input_config']
 
