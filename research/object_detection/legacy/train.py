@@ -193,11 +193,13 @@ def main(_):
           allow_memory_growth=FLAGS.allow_memory_growth,
           max_ckpt_to_keep=FLAGS.max_ckpt_to_keep
       )
+  except KeyboardInterrupt:
+      os.kill(os.getpid(), 9)
   except RuntimeError as e:
       print('UIgnoring annoying RuntimeError: {}'.format(e))
       pass
 
 if __name__ == '__main__':
   tf.app.run()
-  os.kill(os.getpid(), 9)
+
 
