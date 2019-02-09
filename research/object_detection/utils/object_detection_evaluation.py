@@ -248,7 +248,8 @@ class ObjectDetectionEvaluator(DetectionEvaluator):
         """
         if image_id in self._image_ids:
             print('{} images have been added'.format(len(self._image_ids)))
-            raise ValueError('Image with id {} already added.'.format(image_id))
+            print('Image with id {} already added.'.format(image_id))
+            return
 
         groundtruth_classes = (
                 groundtruth_dict[standard_fields.InputDataFields.groundtruth_classes] -
