@@ -251,6 +251,8 @@ class ObjectDetectionEvaluator(DetectionEvaluator):
             print('Image with id {} already added.'.format(image_id))
             return
 
+        print('Adding {}'.format(image_id))
+        
         groundtruth_classes = (
                 groundtruth_dict[standard_fields.InputDataFields.groundtruth_classes] -
                 self._label_id_offset)
