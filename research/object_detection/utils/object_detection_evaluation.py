@@ -247,9 +247,10 @@ class ObjectDetectionEvaluator(DetectionEvaluator):
             raise error if instance masks are not in groundtruth dictionary.
         """
         if image_id in self._image_ids:
-            print('{} images have been added'.format(len(self._image_ids)))
-            raise ValueError('Image with id {} already added.'.format(image_id))
-            # return
+            # print('{} images have been added'.format(len(self._image_ids)))
+            # raise ValueError('Image with id {} already added.'.format(image_id))
+            print('Image with id {} already added.'.format(image_id))
+            return
 
         # print('Adding {}'.format(image_id))
 
