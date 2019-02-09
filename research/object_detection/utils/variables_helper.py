@@ -15,11 +15,9 @@
 
 """Helper functions for manipulating collections of variables during training.
 """
-import logging
 import re
-
 import tensorflow as tf
-
+from tensorflow import logging as logging
 slim = tf.contrib.slim
 
 
