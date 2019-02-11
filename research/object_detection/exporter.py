@@ -456,7 +456,7 @@ def export_inference_graph(input_type,
       output_collection_name,
       graph_hook_fn=graph_rewriter_fn,
       write_inference_graph=write_inference_graph,
-      save_ckpt=True)
+      save_ckpt=save_ckpt)
   pipeline_config.eval_config.use_moving_averages = False
   config_util.save_pipeline_config(pipeline_config, output_directory)
 

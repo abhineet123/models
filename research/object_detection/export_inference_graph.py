@@ -122,10 +122,14 @@ flags.DEFINE_string('config_override', '',
                     'text proto to override pipeline_config_path.')
 flags.DEFINE_boolean('write_inference_graph', False,
                      'If true, writes inference graph to disk.')
+flags.DEFINE_integer('save_ckpt', 0, 'save checkpoint too.')
+
 tf.app.flags.mark_flag_as_required('pipeline_config_path')
 tf.app.flags.mark_flag_as_required('trained_checkpoint_prefix')
 tf.app.flags.mark_flag_as_required('output_directory')
 FLAGS = flags.FLAGS
+
+save_ckpt = FLAGS.save_ckpt
 
 
 def main(_):
@@ -144,7 +148,7 @@ def main(_):
       FLAGS.input_type, pipeline_config, FLAGS.trained_checkpoint_prefix,
       FLAGS.output_directory, input_shape=input_shape,
       write_inference_graph=FLAGS.write_inference_graph,
-      save_ckpt=False)
+      save_ckpt=save_ckpt)
 
 
 if __name__ == '__main__':
