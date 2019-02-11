@@ -343,7 +343,8 @@ def _export_inference_graph(input_type,
                             input_shape=None,
                             output_collection_name='inference_op',
                             graph_hook_fn=None,
-                            write_inference_graph=False):
+                            write_inference_graph=False,
+                            save_ckpt=True):
   """Export helper."""
   tf.gfile.MakeDirs(output_directory)
   frozen_graph_path = os.path.join(output_directory,
@@ -377,11 +378,12 @@ def _export_inference_graph(input_type,
   saver = tf.train.Saver(**saver_kwargs)
   input_saver_def = saver.as_saver_def()
 
-  write_graph_and_checkpoint(
-      inference_graph_def=tf.get_default_graph().as_graph_def(),
-      model_path=model_path,
-      input_saver_def=input_saver_def,
-      trained_checkpoint_prefix=checkpoint_to_use)
+  if save_ckpt:
+      write_graph_and_checkpoint(
+          inference_graph_def=tf.get_default_graph().as_graph_def(),
+          model_path=model_path,
+          input_saver_def=input_saver_def,
+          trained_checkpoint_prefix=checkpoint_to_use)
   if write_inference_graph:
     inference_graph_def = tf.get_default_graph().as_graph_def()
     inference_graph_path = os.path.join(output_directory,
@@ -418,7 +420,8 @@ def export_inference_graph(input_type,
                            input_shape=None,
                            output_collection_name='inference_op',
                            additional_output_tensor_names=None,
-                           write_inference_graph=False):
+                           write_inference_graph=False,
+                           save_ckpt=True):
   """Exports inference graph for the model specified in the pipeline config.
 
   Args:
@@ -452,7 +455,8 @@ def export_inference_graph(input_type,
       input_shape,
       output_collection_name,
       graph_hook_fn=graph_rewriter_fn,
-      write_inference_graph=write_inference_graph)
+      write_inference_graph=write_inference_graph,
+      save_ckpt=True)
   pipeline_config.eval_config.use_moving_averages = False
   config_util.save_pipeline_config(pipeline_config, output_directory)
 
