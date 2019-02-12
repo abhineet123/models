@@ -64,6 +64,8 @@ flags.DEFINE_integer('n_steps', 0, 'no. of training steps (overrides the protobu
 flags.DEFINE_boolean('allow_memory_growth', True, 'allow_memory_growth')
 flags.DEFINE_integer('max_ckpt_to_keep', 1,
                      'Number of checkpoints to keep.')
+flags.DEFINE_integer('save_interval_secs', 600,
+                     'Interval in seconds between checkpoint savings')
 
 flags.DEFINE_boolean('clone_on_cpu', False,
                      'Force clones to be deployed on CPU.  Note that even if '
@@ -196,7 +198,8 @@ def main(_):
                 FLAGS.train_dir,
                 graph_hook_fn=graph_rewriter_fn,
                 allow_memory_growth=FLAGS.allow_memory_growth,
-                max_ckpt_to_keep=FLAGS.max_ckpt_to_keep
+                max_ckpt_to_keep=FLAGS.max_ckpt_to_keep,
+                save_interval_secs=FLAGS.save_interval_secs,
             )
         except KeyboardInterrupt:
             print('Training stopped')
