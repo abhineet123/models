@@ -181,38 +181,38 @@ def main(_):
     pid = os.getpid()
     print('pid: {}'.format(pid))
 
-    while True:
-        try:
-            trainer.train(
-                create_input_dict_fn,
-                model_fn,
-                train_config,
-                master,
-                task,
-                FLAGS.num_clones,
-                worker_replicas,
-                FLAGS.clone_on_cpu,
-                ps_tasks,
-                worker_job_name,
-                is_chief,
-                FLAGS.train_dir,
-                graph_hook_fn=graph_rewriter_fn,
-                allow_memory_growth=FLAGS.allow_memory_growth,
-                max_ckpt_to_keep=FLAGS.max_ckpt_to_keep,
-                save_interval_secs=FLAGS.save_interval_secs,
-            )
-        except KeyboardInterrupt:
-            print('Training stopped')
-        except RuntimeError as e:
-            print('Ignoring annoying RuntimeError: {}'.format(e))
+    # while True:
+    try:
+        trainer.train(
+            create_input_dict_fn,
+            model_fn,
+            train_config,
+            master,
+            task,
+            FLAGS.num_clones,
+            worker_replicas,
+            FLAGS.clone_on_cpu,
+            ps_tasks,
+            worker_job_name,
+            is_chief,
+            FLAGS.train_dir,
+            graph_hook_fn=graph_rewriter_fn,
+            allow_memory_growth=FLAGS.allow_memory_growth,
+            max_ckpt_to_keep=FLAGS.max_ckpt_to_keep,
+            save_interval_secs=FLAGS.save_interval_secs,
+        )
+    # except KeyboardInterrupt:
+    #     print('Training stopped')
+    except RuntimeError as e:
+        print('Ignoring annoying RuntimeError: {}'.format(e))
 
-        event = threading.Event()
-        try:
-            print('pid: {}'.format(pid))
-            print('Waiting for Ctrl+C')
-            event.wait()
-        except KeyboardInterrupt:
-            print('Resuming training')
+    # event = threading.Event()
+    # try:
+    #     print('pid: {}'.format(pid))
+    #     print('Waiting for Ctrl+C')
+    #     event.wait()
+    # except KeyboardInterrupt:
+    #     print('Resuming training')
 
 
 if __name__ == '__main__':
