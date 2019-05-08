@@ -44,6 +44,7 @@ Example usage:
 import functools
 import json
 import os, threading
+import shutil
 
 import tensorflow as tf
 
@@ -78,6 +79,8 @@ flags.DEFINE_integer('ps_tasks', 0,
                      'a parameter server.')
 flags.DEFINE_string('train_dir', '',
                     'Directory to save the checkpoints and training summaries.')
+flags.DEFINE_integer('reset_train', 0,
+                     'delete training folder if it already exists')
 
 flags.DEFINE_string('pipeline_config_path', '',
                     'Path to a pipeline_pb2.TrainEvalPipelineConfig config '
@@ -96,6 +99,11 @@ FLAGS = flags.FLAGS
 @tf.contrib.framework.deprecated(None, 'Use object_detection/model_main.py.')
 def main(_):
     assert FLAGS.train_dir, '`train_dir` is missing.'
+
+    if FLAGS.reset_train and os.path.isdir(FLAGS.train_dir):
+        print('Removing weights folder: {}'.format(FLAGS.train_dir))
+        shutil.rmtree(FLAGS.train_dir)
+
     if FLAGS.task == 0: tf.gfile.MakeDirs(FLAGS.train_dir)
     if FLAGS.pipeline_config_path:
         configs = config_util.get_configs_from_pipeline_file(
