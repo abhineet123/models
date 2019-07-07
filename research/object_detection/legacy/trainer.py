@@ -321,6 +321,8 @@ def train(create_tensor_dict_fn,
                 total_num_replicas=worker_replicas)
             sync_optimizer = training_optimizer
 
+        training_optimizer = tf.train.experimental.enable_mixed_precision_graph_rewrite(training_optimizer)
+        
         with tf.device(deploy_config.optimizer_device()):
             regularization_losses = (None if train_config.add_regularization_loss
             else [])
