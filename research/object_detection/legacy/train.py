@@ -81,6 +81,8 @@ flags.DEFINE_string('train_dir', '',
                     'Directory to save the checkpoints and training summaries.')
 flags.DEFINE_integer('reset_train', 0,
                      'delete training folder if it already exists')
+flags.DEFINE_integer('enable_mixed_precision', 0,
+                     'enable_mixed_precision training')
 
 flags.DEFINE_string('pipeline_config_path', '',
                     'Path to a pipeline_pb2.TrainEvalPipelineConfig config '
@@ -208,6 +210,7 @@ def main(_):
             allow_memory_growth=FLAGS.allow_memory_growth,
             max_ckpt_to_keep=FLAGS.max_ckpt_to_keep,
             save_interval_secs=FLAGS.save_interval_secs,
+            enable_mixed_precision=FLAGS.enable_mixed_precision,
         )
     # except KeyboardInterrupt:
     #     print('Training stopped')
