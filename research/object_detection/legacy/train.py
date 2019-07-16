@@ -83,6 +83,8 @@ flags.DEFINE_integer('reset_train', 0,
                      'delete training folder if it already exists')
 flags.DEFINE_integer('enable_mixed_precision', 0,
                      'enable_mixed_precision training')
+flags.DEFINE_integer('n_cpu_threads', 4,
+                     'n_cpu_threads')
 
 flags.DEFINE_string('pipeline_config_path', '',
                     'Path to a pipeline_pb2.TrainEvalPipelineConfig config '
@@ -208,6 +210,7 @@ def main(_):
             FLAGS.train_dir,
             graph_hook_fn=graph_rewriter_fn,
             allow_memory_growth=FLAGS.allow_memory_growth,
+            n_cpu_threads=FLAGS.n_cpu_threads,
             max_ckpt_to_keep=FLAGS.max_ckpt_to_keep,
             save_interval_secs=FLAGS.save_interval_secs,
             enable_mixed_precision=FLAGS.enable_mixed_precision,

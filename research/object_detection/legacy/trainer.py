@@ -223,6 +223,7 @@ def train(create_tensor_dict_fn,
           train_dir,
           graph_hook_fn=None,
           allow_memory_growth=False,
+          n_cpu_threads=False,
           max_ckpt_to_keep=1,
           save_interval_secs=600,
           enable_mixed_precision=0
@@ -381,7 +382,10 @@ def train(create_tensor_dict_fn,
 
         # Soft placement allows placing on CPU ops without GPU implementation.
         session_config = tf.ConfigProto(allow_soft_placement=True,
-                                        log_device_placement=False)
+                                        log_device_placement=False,
+                                        intra_op_parallelism_threads=n_cpu_threads,
+                                        inter_op_parallelism_threads=n_cpu_threads,
+                                        )
         session_config.gpu_options.allow_growth = allow_memory_growth
 
         # Save checkpoints regularly.
