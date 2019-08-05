@@ -45,6 +45,12 @@ import functools
 import json
 import os, threading
 import shutil
+import logging
+
+logging_fmt = logging.Formatter('%(levelname)s::%(module)s::%(funcName)s::%(lineno)s :  %(message)s')
+logging_level = logging.INFO
+logging.basicConfig(level=logging_level, format=logging_fmt)
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 import tensorflow as tf
 
