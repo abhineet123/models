@@ -47,6 +47,16 @@ import os, threading
 import shutil
 import logging
 
+import sys
+file_path = os.path.dirname(os.path.realpath(__file__))
+parent_path = os.path.dirname(file_path)
+grand_parent_path = os.path.dirname(parent_path)
+slim_path = os.path.join(grand_parent_path, 'slim')
+sys.path.append(grand_parent_path)
+sys.path.append(slim_path)
+
+print('sys.path: {}'.format(sys.path))
+
 logging_fmt = logging.Formatter('%(levelname)s::%(module)s::%(funcName)s::%(lineno)s :  %(message)s')
 logging_level = logging.INFO
 logging.basicConfig(level=logging_level, format=logging_fmt)
