@@ -298,7 +298,7 @@ def build_nasnet_cifar(images, num_classes,
   _update_hparams(hparams, is_training)
 
   if tf.test.is_gpu_available() and hparams.data_format == 'NHWC':
-    tf.logging.info('A GPU is available on the machine, consider using NCHW '
+    print('A GPU is available on the machine, consider using NCHW '
                     'data format for increased speed on GPU.')
 
   if hparams.data_format == 'NCHW':
@@ -350,7 +350,7 @@ def build_nasnet_mobile(images, num_classes,
   _update_hparams(hparams, is_training)
 
   if tf.test.is_gpu_available() and hparams.data_format == 'NHWC':
-    tf.logging.info('A GPU is available on the machine, consider using NCHW '
+    print('A GPU is available on the machine, consider using NCHW '
                     'data format for increased speed on GPU.')
 
   if hparams.data_format == 'NCHW':
@@ -405,7 +405,7 @@ def build_nasnet_large(images, num_classes,
   _update_hparams(hparams, is_training)
 
   if tf.test.is_gpu_available() and hparams.data_format == 'NHWC':
-    tf.logging.info('A GPU is available on the machine, consider using NCHW '
+    print('A GPU is available on the machine, consider using NCHW '
                     'data format for increased speed on GPU.')
 
   if hparams.data_format == 'NCHW':

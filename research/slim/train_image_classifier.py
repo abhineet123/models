@@ -342,7 +342,7 @@ def _get_init_fn():
   # Warn the user if a checkpoint exists in the train_dir. Then we'll be
   # ignoring the checkpoint anyway.
   if tf.train.latest_checkpoint(FLAGS.train_dir):
-    tf.logging.info(
+    print(
         'Ignoring --checkpoint_path because a checkpoint already exists in %s'
         % FLAGS.train_dir)
     return None
@@ -366,7 +366,7 @@ def _get_init_fn():
   else:
     checkpoint_path = FLAGS.checkpoint_path
 
-  tf.logging.info('Fine-tuning from %s' % checkpoint_path)
+  print('Fine-tuning from %s' % checkpoint_path)
 
   return slim.assign_from_checkpoint_fn(
       checkpoint_path,

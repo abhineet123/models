@@ -137,7 +137,7 @@ class PNASNetTest(tf.test.TestCase):
     self.assertEqual(len(end_points), 17)
     self.assertItemsEqual(endpoints_shapes.keys(), end_points.keys())
     for endpoint_name in endpoints_shapes:
-      tf.logging.info('Endpoint name: {}'.format(endpoint_name))
+      print('Endpoint name: {}'.format(endpoint_name))
       expected_shape = endpoints_shapes[endpoint_name]
       self.assertIn(endpoint_name, end_points)
       self.assertListEqual(end_points[endpoint_name].get_shape().as_list(),
@@ -172,7 +172,7 @@ class PNASNetTest(tf.test.TestCase):
     self.assertEqual(len(end_points), 14)
     self.assertItemsEqual(endpoints_shapes.keys(), end_points.keys())
     for endpoint_name in endpoints_shapes:
-      tf.logging.info('Endpoint name: {}'.format(endpoint_name))
+      print('Endpoint name: {}'.format(endpoint_name))
       expected_shape = endpoints_shapes[endpoint_name]
       self.assertIn(endpoint_name, end_points)
       self.assertListEqual(end_points[endpoint_name].get_shape().as_list(),

@@ -182,7 +182,7 @@ def main(_):
     else:
       checkpoint_path = FLAGS.checkpoint_path
 
-    tf.logging.info('Evaluating %s' % checkpoint_path)
+    print('Evaluating %s' % checkpoint_path)
 
     slim.evaluation.evaluate_once(
         master=FLAGS.master,

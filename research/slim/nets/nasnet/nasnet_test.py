@@ -152,7 +152,7 @@ class NASNetTest(tf.test.TestCase):
                         'Predictions': [batch_size, num_classes]}
     self.assertItemsEqual(endpoints_shapes.keys(), end_points.keys())
     for endpoint_name in endpoints_shapes:
-      tf.logging.info('Endpoint name: {}'.format(endpoint_name))
+      print('Endpoint name: {}'.format(endpoint_name))
       expected_shape = endpoints_shapes[endpoint_name]
       self.assertTrue(endpoint_name in end_points)
       self.assertListEqual(end_points[endpoint_name].get_shape().as_list(),
@@ -203,7 +203,7 @@ class NASNetTest(tf.test.TestCase):
                         'Predictions': [batch_size, num_classes]}
     self.assertItemsEqual(endpoints_shapes.keys(), end_points.keys())
     for endpoint_name in endpoints_shapes:
-      tf.logging.info('Endpoint name: {}'.format(endpoint_name))
+      print('Endpoint name: {}'.format(endpoint_name))
       expected_shape = endpoints_shapes[endpoint_name]
       self.assertTrue(endpoint_name in end_points)
       self.assertListEqual(end_points[endpoint_name].get_shape().as_list(),
@@ -260,7 +260,7 @@ class NASNetTest(tf.test.TestCase):
                         'Predictions': [batch_size, num_classes]}
     self.assertItemsEqual(endpoints_shapes.keys(), end_points.keys())
     for endpoint_name in endpoints_shapes:
-      tf.logging.info('Endpoint name: {}'.format(endpoint_name))
+      print('Endpoint name: {}'.format(endpoint_name))
       expected_shape = endpoints_shapes[endpoint_name]
       self.assertTrue(endpoint_name in end_points)
       self.assertListEqual(end_points[endpoint_name].get_shape().as_list(),

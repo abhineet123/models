@@ -173,7 +173,7 @@ def build_pnasnet_large(images,
   # pylint: enable=protected-access
 
   if tf.test.is_gpu_available() and hparams.data_format == 'NHWC':
-    tf.logging.info('A GPU is available on the machine, consider using NCHW '
+    print('A GPU is available on the machine, consider using NCHW '
                     'data format for increased speed on GPU.')
 
   if hparams.data_format == 'NCHW':
@@ -221,7 +221,7 @@ def build_pnasnet_mobile(images,
   # pylint: enable=protected-access
 
   if tf.test.is_gpu_available() and hparams.data_format == 'NHWC':
-    tf.logging.info('A GPU is available on the machine, consider using NCHW '
+    print('A GPU is available on the machine, consider using NCHW '
                     'data format for increased speed on GPU.')
 
   if hparams.data_format == 'NCHW':
